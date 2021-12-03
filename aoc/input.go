@@ -57,3 +57,13 @@ func Pairs(lines []string) []Pair {
 
 	return out
 }
+
+func Characters(lines []string) [][]string {
+	out := make([][]string, len(lines))
+
+	for i, line := range lines {
+		out[i] = strings.Split(line, "")
+	}
+
+	return out
+}
