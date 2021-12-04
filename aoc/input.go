@@ -67,3 +67,32 @@ func Characters(lines []string) [][]string {
 
 	return out
 }
+
+func Boards(lines []string) ([]string, [][][]string) {
+	boards := make([][][]string, 0)
+	var drawn []string
+
+	bi := -1
+	for i, line := range lines {
+		if i == 0 {
+			drawn = strings.Split(line, ",")
+			continue
+		}
+
+		if line == "" {
+			bi++
+			boards = append(boards, [][]string{})
+			continue
+		}
+
+		cleaned := strings.ReplaceAll(strings.TrimLeft(line, " "), "  ", " ")
+		boardLine := strings.Split(cleaned, " ")
+
+		boards[bi] = append(
+			boards[bi],
+			boardLine,
+		)
+	}
+
+	return drawn, boards
+}
