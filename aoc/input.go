@@ -96,3 +96,26 @@ func Boards(lines []string) ([]string, [][][]string) {
 
 	return drawn, boards
 }
+
+func DirectedVectors(lines []string) [][2][2]int {
+	out := make([][2][2]int, len(lines))
+
+	for i, line := range lines {
+		parts := strings.Split(line, " -> ")
+		start := strings.Split(parts[0], ",")
+		end := strings.Split(parts[1], ",")
+
+		out[i] = [2][2]int{
+			{
+				Int(start[0]),
+				Int(start[1]),
+			},
+			{
+				Int(end[0]),
+				Int(end[1]),
+			},
+		}
+	}
+
+	return out
+}
