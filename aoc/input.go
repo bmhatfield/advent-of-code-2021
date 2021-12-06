@@ -31,6 +31,17 @@ func Ints(lines []string) []int {
 	return out
 }
 
+func SplitInts(lines []string) []int {
+	out := make([]int, 0)
+	for _, line := range lines {
+		strs := strings.Split(line, ",")
+		for _, s := range strs {
+			out = append(out, Int(s))
+		}
+	}
+	return out
+}
+
 type Pair struct {
 	Key   string
 	Value int
