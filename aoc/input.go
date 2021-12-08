@@ -130,3 +130,20 @@ func DirectedVectors(lines []string) [][2][2]int {
 
 	return out
 }
+
+func SignalOutputs(lines []string) [][2][]string {
+	out := make([][2][]string, len(lines))
+
+	for l, line := range lines {
+		lparts := strings.Split(line, " | ")
+		signals := strings.Split(lparts[0], " ")
+		outputs := strings.Split(lparts[1], " ")
+
+		out[l] = [2][]string{
+			signals,
+			outputs,
+		}
+	}
+
+	return out
+}
