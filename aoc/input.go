@@ -147,3 +147,19 @@ func SignalOutputs(lines []string) [][2][]string {
 
 	return out
 }
+
+func Matrix(lines []string) [][]int {
+	out := make([][]int, len(lines))
+
+	for l, line := range lines {
+		parts := strings.Split(line, "")
+
+		out[l] = make([]int, len(parts))
+
+		for i, part := range parts {
+			out[l][i] = Int(part)
+		}
+	}
+
+	return out
+}
