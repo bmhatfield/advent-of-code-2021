@@ -163,3 +163,14 @@ func Matrix(lines []string) [][]int {
 
 	return out
 }
+
+func Edges(lines []string) [][2]string {
+	out := make([][2]string, len(lines))
+
+	for i, line := range lines {
+		edges := strings.Split(line, "-")
+		out[i] = [2]string{edges[0], edges[1]}
+	}
+
+	return out
+}
