@@ -11,37 +11,44 @@ func small(node string) bool {
 	return strings.ToLower(node) == node
 }
 
-func visited(hist map[string]int, node string) bool {
-	n := hist[node]
+type history struct {
+	r map[string]int
+
+	smallx2 bool
+}
+
+func (h *history) visited(node string) bool {
+	n := h.r[node]
 
 	switch node {
 	case twelve.Start, twelve.End:
 		return n > 0
 	default:
-		for k, v := range hist {
-			if small(k) && v > 1 {
-				return n > 0
-			}
+		if h.smallx2 {
+			return n > 0
 		}
 
 		return n > 1
 	}
 }
 
-func visit(hist map[string]int, node string) map[string]int {
+func (h *history) visit(node string) *history {
 	out := make(map[string]int)
-	for k, v := range hist {
+	for k, v := range h.r {
 		out[k] = v
 	}
 
 	out[node]++
 
-	return out
+	return &history{
+		r:       out,
+		smallx2: h.smallx2 || out[node] > 1,
+	}
 }
 
-func descend(idx twelve.Index, hist map[string]int, left string) [][]string {
+func descend(idx twelve.Index, hist *history, left string) [][]string {
 	if small(left) {
-		hist = visit(hist, left)
+		hist = hist.visit(left)
 	}
 
 	paths := make([][]string, 0)
@@ -51,7 +58,7 @@ func descend(idx twelve.Index, hist map[string]int, left string) [][]string {
 	}
 
 	for right := range idx[left] {
-		if small(right) && visited(hist, right) {
+		if small(right) && hist.visited(right) {
 			continue
 		}
 
@@ -80,7 +87,7 @@ func main() {
 		idx.Insert(edge[0], edge[1])
 	}
 
-	paths := descend(idx, make(map[string]int), twelve.Start)
+	paths := descend(idx, &history{r: map[string]int{}}, twelve.Start)
 
-	fmt.Println(pathjoin(paths), len(paths))
+	fmt.Println(len(paths))
 }
