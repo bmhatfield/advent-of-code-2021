@@ -1,6 +1,10 @@
 package aoc
 
-import "sort"
+import (
+	"sort"
+
+	"github.com/pkg/math"
+)
 
 func Mean(nums []int) float64 {
 	var sum int
@@ -26,4 +30,8 @@ func Abs(x int) int {
 
 func Summation(n int) int {
 	return (n * (n + 1)) / 2
+}
+
+func Min(a, b int) int {
+	return math.Min(a, b)
 }

@@ -174,3 +174,28 @@ func Edges(lines []string) [][2]string {
 
 	return out
 }
+
+func ActivationCode(lines []string) ([][2]int, []string) {
+	coords := make([][2]int, 0, len(lines))
+	instrs := make([]string, 0)
+
+	var mode int
+	for _, line := range lines {
+		if line == "" {
+			mode++
+			continue
+		}
+
+		switch mode {
+		case 0:
+			c := strings.Split(line, ",")
+			coords = append(coords, [2]int{
+				Int(c[0]), Int(c[1]),
+			})
+		case 1:
+			instrs = append(instrs, line)
+		}
+	}
+
+	return coords, instrs
+}
