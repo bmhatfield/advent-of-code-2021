@@ -199,3 +199,26 @@ func ActivationCode(lines []string) ([][2]int, []string) {
 
 	return coords, instrs
 }
+
+func PolymerRules(lines []string) (string, map[string]string) {
+	var template string
+	rules := make(map[string]string)
+
+	var mode int
+	for _, line := range lines {
+		if line == "" {
+			mode++
+			continue
+		}
+
+		switch mode {
+		case 0:
+			template = line
+		case 1:
+			rule := strings.Split(line, " -> ")
+			rules[rule[0]] = rule[1]
+		}
+	}
+
+	return template, rules
+}
