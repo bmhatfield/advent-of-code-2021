@@ -1,0 +1,25 @@
+// func median(grid f.Grid) int {
+// 	pts := make([]int, grid.Height*grid.Width)
+
+// 	for y, row := range grid.Points {
+// 		for x, pt := range row {
+// 			offset := y*grid.Width + x
+// 			pts[offset] = pt.Val
+// 		}
+// 	}
+
+// 	return aoc.Median(pts)
+// }
+
+// func est(x, y, gx, gy, mult int) uint {
+// 	manhattan := gx - x + gy - y
+// 	return uint(manhattan * mult)
+// }
+
+	// guess := map[f.Point]uint{
+	// 	*start: est(start.X, start.Y, grid.Width-1, grid.Height-1, med),
+	// }
+
+			// nEst := est(n.X, n.Y, grid.Width-1, grid.Height-1, med)
+
+            // guess[n] = nCost + nEst
